@@ -157,16 +157,17 @@
     }
 
     function getWeek(y, nweek) {
-        var startdate = new Date(y, 0, 1);
-        startdate.setDate(startdate.getUTCDate() + (nweek - 1) * 7);
-        var dayweek = startdate.getUTCDay();
-        var giorniAggiuntivi = (dayweek === 0) ? 1 : (8 - dayweek);
-        startdate.setDate(startdate.getUTCDate() + giorniAggiuntivi);
-        var stopdate = new Date(startdate);
+        nweek = nweek-1
+        var startdate = new Date(Date.UTC(y, 0, 1))
+        startdate.setDate(startdate.getUTCDate() + ((nweek - 1) * 7))
+        var dayweek = startdate.getUTCDay()
+        var giorniAggiuntivi = (dayweek === 0) ? 1 : (8 - dayweek)
+        startdate.setDate(startdate.getUTCDate() + giorniAggiuntivi)
+        var stopdate = new Date(startdate)
         stopdate.setDate(stopdate.getUTCDate() + 6)
-        if (parseInt(startdate.getUTCFullYear()) !== parseInt(year)) {
-            startdate = new Date(year, 0, 1);
-        }
+        //if (parseInt(startdate.getUTCFullYear()) !== parseInt(year)) {
+        //    startdate = new Date(year, 0, 1)
+        //}
         if (stopdate.getTime() === startdate.getTime()){
             return startdate.toLocaleString('en', {month: 'short'}) + ' ' + startdate.getUTCDate()
         }
@@ -331,18 +332,21 @@
 
         //WATCHED WEEK
         let dataChartWeek = []
-        let fs = false
-        const firstDay = new Date(parseInt(year), 0, 1)
-        if (firstDay.getUTCDay() === 1) {fs = true}
+        //let fs = false
+        //const firstDay = new Date(parseInt(year), 0, 1)
+        //if (firstDay.getUTCDay() === 1) {fs = true}
         fillArray(data.weeks, 0, getWeeksInYear(year)).forEach(function (item, index){
-            let w2 = item._id
+            //let w2 = item._id
+            let w2 = item._id + 1
             let y2 = year
             let w3 = w2
-            if(w2 === 0 && !fs){w2 = getWeeksInYear(year-1); w3 = getWeeksInYear(year-1).toString() + ' (' + (year-1).toString() + ')'; y2 = y2-1}
-            if(fs){w3 = w3 + 1}
+            //if(w2 === 0 && !fs){w2 = getWeeksInYear(year-1); w3 = getWeeksInYear(year-1).toString() + ' (' + (year-1).toString() + ')'; y2 = y2-1}
+            //if(fs){w3 = w3 + 1}
+            w3 = w2
             if (item.sum > 0){dataChartWeek.push({ name: item._id, y: item.sum + 0.25, week: w2, year: y2, w3: w3})}
             else{dataChartWeek.push({ name: item._id, y: item.sum + 0.25, color: "#445566", week: w2, year: y2, w3: w3})}
         })
+        //console.log(dataChartWeek)
         generalChart.chart.height = undefined
         generalChart.plotOptions = {column: {pointPadding: 0.08, borderWidth: 0, borderRadius: 1.8, groupPadding: 0,}}
         generalChart['tooltip'] = {
@@ -362,7 +366,8 @@
             },
             point: {events: {click: function () {
                 let p = dataChartWeek[this.options.name]
-                location.href = lbdurl + data.username+'/films/diary/for/'+p.year+'/week/' + p.week + "/";
+                //location.href = lbdurl + data.username+'/films/diary/for/'+p.year+'/week/' + p.week + "/";
+                window.open(lbdurl + data.username + '/films/diary/for/' + p.year + '/week/' + p.week + "/", '_blank');
             }}}
         }]
         Highcharts.chart('watchedWeek', generalChart)
