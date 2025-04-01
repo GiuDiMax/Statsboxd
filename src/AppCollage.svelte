@@ -30,10 +30,10 @@
         //         {tmdb: '418078', name: 'It Comes at Night', rewatch: false, like: false, r: 3.5},
         //         {tmdb: '418078', name: 'It Comes at Night', rewatch: false, like: false, r: 3.5},
         //     ]}
+        if (!(year > 0)){year = ''}
+        if (!(month > 0)){month = ''}
         const resp = await fetch(baseUrl + 'collage/' + username + '?year=' + year + '&month=' + month,
-            {method: "GET",
-                //headers: {"Accept-Encoding": "br"}
-            },
+            {method: "GET"},
         )
         return resp.json()
     }
@@ -59,7 +59,6 @@
     }
 
     async function setTmdb(element, event, lang='&language=en'){
-        //const element = jQuery(event.target)
         const element2 = jQuery(element.target)
         let m_t = ''
         let code = ''
@@ -72,7 +71,6 @@
             code = element2.data('tmdb_tv')
         }else{return}
         const response = await fetch('https://api.themoviedb.org/3/'+m_t+'/'+code+'/images?api_key='+tmdb_key + lang)
-        //console.log('https://api.themoviedb.org/3/'+m_t+'/'+code+'/images?api_key='+tmdb_key + lang)
         if (response.ok) {
             const data = await response.json()
             if (data['posters'].length > 0) {
