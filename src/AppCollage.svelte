@@ -4,6 +4,8 @@
     import {baseUrl, tmdb_key} from "./config.js"
     import * as htmlToImage from 'html-to-image'
     export let username
+    export let year
+    export let month
     let loading = true
     let data = {}
 
@@ -19,7 +21,7 @@
         return []
     }
 
-    async function getCollage(username){
+    async function getCollage(username, year, month){
         // return {c_month: 2, c_year: 2024, ids: [
         //         {tmdb: '418078', name: 'It Comes at Night', rewatch: false, like: false, r: 3.5},
         //         {tmdb: '418078', name: 'It Comes at Night', rewatch: false, like: false, r: 3.5},
@@ -28,7 +30,7 @@
         //         {tmdb: '418078', name: 'It Comes at Night', rewatch: false, like: false, r: 3.5},
         //         {tmdb: '418078', name: 'It Comes at Night', rewatch: false, like: false, r: 3.5},
         //     ]}
-        const resp = await fetch(baseUrl + 'collage/' + username,
+        const resp = await fetch(baseUrl + 'collage/' + username + '?year=' + year + '&month=' + month,
             {method: "GET",
                 //headers: {"Accept-Encoding": "br"}
             },
@@ -59,8 +61,18 @@
     async function setTmdb(element, event, lang='&language=en'){
         //const element = jQuery(event.target)
         const element2 = jQuery(element.target)
-        if (element2.data('tmdb') === undefined || element2.data('isLoaded')){return}
-        const response = await fetch('https://api.themoviedb.org/3/movie/'+element2.data('tmdb')+'/images?api_key='+tmdb_key + lang)
+        let m_t = ''
+        let code = ''
+        if (element2.data('isLoaded')){return}
+        if (element2.data('tmdb') !== undefined){
+            m_t = 'movie'
+            code = element2.data('tmdb')
+        }else if(element2.data('tmdb_tv') !== undefined){
+            m_t = 'tv'
+            code = element2.data('tmdb_tv')
+        }else{return}
+        const response = await fetch('https://api.themoviedb.org/3/'+m_t+'/'+code+'/images?api_key='+tmdb_key + lang)
+        //console.log('https://api.themoviedb.org/3/'+m_t+'/'+code+'/images?api_key='+tmdb_key + lang)
         if (response.ok) {
             const data = await response.json()
             if (data['posters'].length > 0) {
@@ -122,7 +134,7 @@
     }
 
     onMount(async () => {
-        data = await getCollage(username)
+        data = await getCollage(username, year, month)
         init(data)
         loading = false
     })
@@ -150,7 +162,7 @@
                     <div class="poster2">
                         <div class="imgContainer">
                             <div class="containertextimg"><span>{item.name}</span></div>
-                            <img class="image tmdbimg" on:load={setTmdb} on:error={handleImageError} src="images/posterbig.webp" data-tmdb="{item.tmdb}" alt="{item.name}" crossorigin="anonymous"/>
+                            <img class="image tmdbimg" on:load={setTmdb} on:error={handleImageError} src="images/posterbig.webp" data-tmdb="{item.tmdb}" data-tmdb_tv="{item.tmdb_tv}" alt="{item.name}" crossorigin="anonymous"/>
                         </div>
                         <span class="stars">
                             {#if item.hasOwnProperty('r')}

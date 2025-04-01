@@ -17,6 +17,7 @@ import './assets/css/other.css'
 const urlParams = new URLSearchParams(window.location.search);
 let username = urlParams.get('username')
 let year = parseInt(urlParams.get('year'))
+let month = parseInt(urlParams.get('month'))
 let collage = urlParams.get('collage')
 let wrapped = urlParams.get('wrapped')
 let donator = urlParams.get('donator')
@@ -28,10 +29,10 @@ if(username !== null && rec !== null) {
   app = new AppRec({target: document.getElementById('app'), props: {username: username}})
 }else if(username !== null && donator !== null) {
   app = new AppDonator({target: document.getElementById('app'), props: {username: username}})
+}else if(username !== null && collage !== null) {
+  app = new AppCollage({target: document.getElementById('app'), props: {username: username, year: year, month: month}})
 }else if(username !== null && !isNaN(year)) {
   app = new AppYearStats({target: document.getElementById('app'), props: {username: username, year: year}})
-}else if(username !== null && collage !== null) {
-  app = new AppCollage({target: document.getElementById('app'), props: {username: username}})
 }else if(username !== null && wrapped !== null) {
   app = new AppWrapped({target: document.getElementById('app'), props: {username: username}})
 }else if(username !== null) {

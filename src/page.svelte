@@ -801,7 +801,7 @@
                 <a id="updatebtn" on:click={handleUpdate} class="clickable seeallbutton updatebutton" href="{data.donator? '/?username=' + data.username + '&donator' : '/#'}">
                     <span class="material-symbols-rounded icon">sync</span>Update
                 </a>
-                <a class="clickable seeallbutton updatebutton collagebutton" href="/?username={ data.username }&collage" target="_blank">
+                <a class="clickable seeallbutton updatebutton collagebutton" href="/?username={ data.username }&collage&year={new Date().getFullYear()}&month={new Date().getMonth()}" target="_blank">
                     <span class="material-symbols-rounded icon">grid_on</span>Last month collage
                 </a>
                 <!--<a class="clickable seeallbutton updatebutton wrappedbutton" href="/?username={ data.username }&wrapped" target="_blank">
