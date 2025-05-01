@@ -44,12 +44,13 @@
         const response = await fetch('https://api.themoviedb.org/3/movie/' + element2.data('tmdb') + '?api_key=' + tmdb_key)
         if (response.ok) {
             const data = await response.json()
-            //console.log(data)
             if (data.hasOwnProperty('poster_path')) {
                 element2.attr('src', 'https://image.tmdb.org/t/p/w185/' + data['poster_path'])
                 element2.parent().addClass("imgok");
                 //element2.css('height', '278px')
-            } else {element2.css('height', '278px')}
+            } else {
+                element2.css('height', '278px')
+            }
         }
     }
 
@@ -76,10 +77,15 @@
             if (data['posters'].length > 0) {
                 element2.attr('src', 'https://image.tmdb.org/t/p/w185/'+data['posters'][0]['file_path'])
                 element2.parent().addClass("imgok")
-            }else{
-                if (lang !== '') {await setTmdb2(element2)}
+            }else if (lang !== '') {
+                await setTmdb2(element2)
             }
-        } else {jQuery('.tohide').addClass("hide")}
+        } else {
+            element2.removeAttr('crossorigin');
+            element2.attr('src', element2.data('lbd'))
+            element2.parent().addClass("imgok")
+            jQuery('.tohide').addClass("hide")
+        }
         element2.data('isLoaded', true)
     }
 
@@ -160,7 +166,7 @@
                     <div class="poster2">
                         <div class="imgContainer">
                             <div class="containertextimg"><span>{item.name}</span></div>
-                            <img class="image tmdbimg" on:load={setTmdb} on:error={handleImageError} src="images/posterbig.webp" data-tmdb="{item.tmdb}" data-tmdb_tv="{item.tmdb_tv}" alt="{item.name}" crossorigin="anonymous"/>
+                            <img class="image tmdbimg" on:load={setTmdb} on:error={handleImageError} src="images/posterbig.webp" data-tmdb="{item.tmdb}" data-tmdb_tv="{item.tmdb_tv}" data-lbd="{item.poster}" alt="{item.name}" crossorigin="anonymous"/>
                         </div>
                         <span class="stars">
                             {#if item.hasOwnProperty('r')}
