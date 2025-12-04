@@ -1270,7 +1270,7 @@
         {#if data.ru}
             <section class="sectionStats">
                 <div class="sepline">
-                    <span>Rated higher then average</span>
+                    <span>Rated higher than average</span>
                     <div class="line"></div>
                 </div>
                 <div class="filmList hideLast">
@@ -1291,7 +1291,7 @@
             </section>
             <section class="sectionStats">
                 <div class="sepline">
-                    <span>Rated lower then average</span>
+                    <span>Rated lower than average</span>
                     <div class="line"></div>
                 </div>
                 <div class="filmList hideLast">
@@ -1471,7 +1471,7 @@
 
         <section class="sectionStats">
             <div class="sepline">
-                <span>Rated higher then average</span>
+                <span>Rated higher than average</span>
                 <div class="line"></div>
             </div>
             <div class="filmList hideLast">
@@ -1492,7 +1492,7 @@
         </section>
         <section class="sectionStats">
             <div class="sepline">
-                <span>Rated lower then average</span>
+                <span>Rated lower than average</span>
                 <div class="line"></div>
             </div>
             <div class="filmList hideLast">
