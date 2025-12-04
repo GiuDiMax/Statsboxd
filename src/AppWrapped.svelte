@@ -8,7 +8,7 @@
     let data = {}
     let message = "Error"
     let tmpdata = {}
-    const year = 2024
+    const year = 2025
     var index = 0
     const CORS = "https://worker.statsboxd.top/" + "cors?url="
 

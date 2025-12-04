@@ -807,9 +807,9 @@
                 <a class="clickable seeallbutton updatebutton collagebutton" href="/?username={ data.username }&collage&year={previousMonth.getFullYear()}&month={previousMonth.getMonth() + 1}" target="_blank">
                     <span class="material-symbols-rounded icon">grid_on</span>Last month collage
                 </a>
-                <!--<a class="clickable seeallbutton updatebutton wrappedbutton" href="/?username={ data.username }&wrapped" target="_blank">
-                    <span class="material-symbols-rounded icon">summarize</span>2024 Wrapped
-                </a>-->
+                <a class="clickable seeallbutton updatebutton wrappedbutton" href="/?username={ data.username }&wrapped" target="_blank">
+                    <span class="material-symbols-rounded icon">summarize</span>2025 Wrapped
+                </a>
                 <a class="clickable seeallbutton updatebutton recbutton" href="/?username={ data.username }&rec" target="_blank">
                     <span class="material-symbols-rounded icon">recommend</span>Film Recommendation
                 </a>
