@@ -244,7 +244,7 @@
                     </div>
                     <div id="favMovie" class="favMovie"></div>
 
-                    <div class="columns" style="margin-top: 3rem;">
+                    <div class="columns" style="margin-top: 2.7rem;">
                         {#each ['Actor', 'Director'] as i}
                             <div class="column">
                                 <div class="plantext">
