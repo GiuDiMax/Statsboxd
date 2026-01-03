@@ -556,7 +556,7 @@
     <div class="navbar">
         <a class="" href="//github.com/GiuDiMax/Statsboxd" target="_blank">Repo</a>
         <a href="//t.me/giudimax" target="_blank">Contact Me</a>
-        <a class="" href="//buymeacoffee.com/giudimax" target="_blank">Support me</a>
+        <a class="" href="//ko-fi.com/giudimax" target="_blank">Support me</a>
     </div>
 </div>
 <div class="content" id="content" on:load={init()}>
@@ -786,7 +786,7 @@
             <h3 class="arrowcheck">
                 <!--Your last update: { data.update }. <br />-->
                 Do you like the project? The server and domain have management costs.<br />
-                Consider <a target="_blank" href="//buymeacoffee.com/giudimax">supporting me</a>.
+                Consider <a target="_blank" href="//ko-fi.com/giudimax">supporting me</a>.
                 <!--Have you already donated?: <a href='https://t.me/giudimax' target='_blank'>contact me on Telegram</a>.-->
             </h3>
         {/if}

@@ -160,7 +160,7 @@
                 <br />
             </p>
             <p>
-                If you like the project consider to <a target="_blank" href="//buymeacoffee.com/giudimax">supporting me</a> or
+                If you like the project consider to <a target="_blank" href="//ko-fi.com/giudimax">supporting me</a> or
                 <a target="_blank" href="//github.com/GiuDiMax/Statsboxd">collaborating on Github</a>
                 <br />
             </p>
