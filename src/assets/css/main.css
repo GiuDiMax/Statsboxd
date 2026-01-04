@@ -137,6 +137,7 @@ span{
     overflow: visible;
     position: absolute;
     top: 0;
+    z-index: -1;
 }
 
 .mainTitlesec .-right {
