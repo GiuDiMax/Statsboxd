@@ -16,6 +16,7 @@ import './assets/css/other.css'
 //const pathSplit = window.location.href.split(import.meta.env.BASE_URL)[1].split("/")
 const urlParams = new URLSearchParams(window.location.search);
 let username = urlParams.get('username')
+let idx = urlParams.get('id')
 let year = parseInt(urlParams.get('year'))
 let month = parseInt(urlParams.get('month'))
 let collage = urlParams.get('collage')
@@ -27,8 +28,8 @@ let rec = urlParams.get('rec')
 let app;
 if(username !== null && rec !== null) {
   app = new AppRec({target: document.getElementById('app'), props: {username: username}})
-}else if(username !== null && donator !== null) {
-  app = new AppDonator({target: document.getElementById('app'), props: {username: username}})
+}else if(idx !== null && donator !== null) {
+  app = new AppDonator({target: document.getElementById('app'), props: {username: username, idx: idx}})
 }else if(username !== null && collage !== null) {
   app = new AppCollage({target: document.getElementById('app'), props: {username: username, year: year, month: month}})
 }else if(username !== null && !isNaN(year)) {

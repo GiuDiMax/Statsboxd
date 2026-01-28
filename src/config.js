@@ -1,6 +1,6 @@
 //export let baseUrl = "https://worker.statsboxd.top/"
 export let baseUrl = "https://statsboxd-worker.vercel.app/"
-if(import.meta.env.VITE_TEST>0){baseUrl = 'http://127.0.0.1:8787/'}
+if(import.meta.env.VITE_TEST>0){baseUrl = 'http://localhost:3001/'}
 
 export const tmdb_key = '03209f50e8253cf416b595048aced2ff'
 export const lbdurl = "https://letterboxd.com/"

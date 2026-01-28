@@ -160,14 +160,14 @@
                 <br />
             </p>
             <p>
-                If you like the project consider to <a target="_blank" href="//buymeacoffee.com/giudimax">supporting me</a> or
+                If you like the project consider to <a target="_blank" href="//ko-fi.com/giudimax">supporting me</a> or
                 <a target="_blank" href="//github.com/GiuDiMax/Statsboxd">collaborating on Github</a>
                 <br />
             </p>
             <br/>
             <strong style="">Supporters features:</strong>
             <ul style="line-height: 1.5em">
-                <li>Stats without zip file using statsboxd.top?username=username&donator;</li>
+                <li>Stats without zip file using statsboxd.top?username=your_letterboxd_username&id=your_letterboxd_ide&donator;</li>
                 <li>Share your stats;</li>
                 <li>Technical support;</li>
                 <li>After you donate, contact me and write me your letterboxd username.</li>

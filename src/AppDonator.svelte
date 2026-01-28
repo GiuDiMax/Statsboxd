@@ -2,6 +2,7 @@
     import {onMount} from 'svelte'
     import { baseUrl } from './config.js'
     export let username
+    export let idx
 
     let loading = true
     let data = {}
@@ -22,8 +23,8 @@
         return await resp.json()
     }
 
-    async function getDonator(username, diary=false){
-        let data = await fetch(baseUrl + 'donator?username=' + username)
+    async function getDonator(idx, diary=false){
+        let data = await fetch(baseUrl + 'donator?id=' + idx)
         return await data.json()
     }
 
@@ -44,7 +45,7 @@
         }
 
         try{
-            const data0 = await getDonator(username)
+            const data0 = await getDonator(idx)
             const uid = data0.id
             const diary = data0.diary
             const watches = data0.watches
