@@ -2310,7 +2310,7 @@ span{
 /*SFONDO*/
 @media only screen and (min-width: 1400px) {
     .sfondo{
-        background-image: url("/static/images/sfondo2.webp");
+        background-image: url("/images/sfondo2.webp");
         background-repeat: no-repeat;
         background-size: contain;
         position: absolute;
@@ -2324,7 +2324,7 @@ span{
 
 @media only screen and (min-width: 800px) and (max-width: 1399px) {
     .sfondo{
-        background-image: url("/static/images/sfondoint.webp");
+        background-image: url("/images/sfondoint.webp");
         background-repeat: no-repeat;
         background-size: contain;
         position: absolute;
@@ -2338,7 +2338,7 @@ span{
 
 @media only screen and (min-width: 500px) and (max-width: 799px) {
     .sfondo{
-        background-image: url("/static/images/sfondoint2.webp");
+        background-image: url("/images/sfondoint2.webp");
         background-repeat: no-repeat;
         background-size: contain;
         position: absolute;
@@ -2353,7 +2353,7 @@ span{
 
 @media only screen and (max-width: 499px) {
     .sfondo{
-        background-image: url("/static/images/sfondomobile.webp");
+        background-image: url("/images/sfondomobile.webp");
         background-repeat: no-repeat;
         background-size: contain;
         position: absolute;

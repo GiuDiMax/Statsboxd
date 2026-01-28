@@ -1,5 +1,3 @@
-//import App from './App.svelte'
-//import createApp from 'svelte';
 import AppStats from './AppStats.svelte'
 import AppYearStats from './AppYearStats.svelte'
 import AppFile from './AppFile.svelte'
@@ -11,34 +9,35 @@ import './assets/css/font.css'
 import './assets/css/main.css'
 import './assets/css/mobile.css'
 import './assets/css/other.css'
+import { mount } from 'svelte'
 
-//const appBaseUrl = ''
-//const pathSplit = window.location.href.split(import.meta.env.BASE_URL)[1].split("/")
 const urlParams = new URLSearchParams(window.location.search);
-let username = urlParams.get('username')
-let idx = urlParams.get('id')
-let year = parseInt(urlParams.get('year'))
-let month = parseInt(urlParams.get('month'))
-let collage = urlParams.get('collage')
-let wrapped = urlParams.get('wrapped')
-let donator = urlParams.get('donator')
-let rec = urlParams.get('rec')
-//if (pathSplit.length > 0 && pathSplit[0] !== ''){username = pathSplit[0]}
-//if (pathSplit.length > 1 && pathSplit[1] !== ''){year = parseInt(pathSplit[1])}
+const username = urlParams.get('username')
+const idx = urlParams.get('id')
+const year = parseInt(urlParams.get('year'))
+const month = parseInt(urlParams.get('month'))
+const collage = urlParams.get('collage')
+const wrapped = urlParams.get('wrapped')
+const donator = urlParams.get('donator')
+const rec = urlParams.get('rec')
+
+const target = document.getElementById('app');
 let app;
-if(username !== null && rec !== null) {
-  app = new AppRec({target: document.getElementById('app'), props: {username: username}})
-}else if(idx !== null && donator !== null) {
-  app = new AppDonator({target: document.getElementById('app'), props: {username: username, idx: idx}})
-}else if(username !== null && collage !== null) {
-  app = new AppCollage({target: document.getElementById('app'), props: {username: username, year: year, month: month}})
-}else if(username !== null && !isNaN(year)) {
-  app = new AppYearStats({target: document.getElementById('app'), props: {username: username, year: year}})
-}else if(username !== null && wrapped !== null) {
-  app = new AppWrapped({target: document.getElementById('app'), props: {username: username}})
-}else if(username !== null) {
-  app = new AppStats({target: document.getElementById('app'), props: {username: username}})
-} else{
-  app = new AppFile({target: document.getElementById('app')})
+
+if (username !== null && rec !== null) {
+  app = mount(AppRec, { target, props: { username } })
+} else if (idx !== null && donator !== null) {
+  app = mount(AppDonator, { target, props: { username, idx } })
+} else if (username !== null && collage !== null) {
+  app = mount(AppCollage, { target, props: { username, year, month } })
+} else if (username !== null && !isNaN(year)) {
+  app = mount(AppYearStats, { target, props: { username, year } })
+} else if (username !== null && wrapped !== null) {
+  app = mount(AppWrapped, { target, props: { username } })
+} else if (username !== null) {
+  app = mount(AppStats, { target, props: { username } })
+} else {
+  app = mount(AppFile, { target })
 }
+
 export default app;
