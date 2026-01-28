@@ -1,27 +1,42 @@
 <script>
     let { data, year } = $props();
     let showYears = $state(false);
+
+    $effect(() => {
+        const handleOutsideClick = (event) => {
+            if (showYears && !event.target.closest(".popupYearContainer")) {
+                showYears = false;
+            }
+        };
+
+        if (showYears) {
+            window.addEventListener("click", handleOutsideClick);
+        }
+
+        return () => {
+            window.removeEventListener("click", handleOutsideClick);
+        };
+    });
 </script>
 
 {#if data.hasOwnProperty("yearsStats")}
     <div
         class="popupYearContainer {year !== '' ? 'popupYear2Container' : ''} "
-        onmouseleave={() => {
-            showYears = false;
-        }}
         role="presentation"
     >
         <button
             class="popupButton"
             data-show="popupYear"
-            onclick={() => {
+            onclick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 showYears = !showYears;
             }}
             aria-label="Select Year"
         >
-            <div class="arrow-down"></div>
+            <span class="arrow-down"></span>
         </button>
-        <div id="popupYear" class="popupYear {showYears ? '' : 'hide'}">
+        <div id="popupYear" class="popupYear" class:hide={!showYears}>
             <div class="arrow-up"></div>
             <div class="listaAnni">
                 <div>

@@ -37,20 +37,54 @@
     }
 
     async function getCollage(username, year, month) {
-        // return {c_month: 2, c_year: 2024, ids: [
-        //         {tmdb: '418078', name: 'It Comes at Night', rewatch: false, like: false, r: 3.5},
-        //         {tmdb: '418078', name: 'It Comes at Night', rewatch: false, like: false, r: 3.5},
-        //         {tmdb: '418078', name: 'It Comes at Night', rewatch: false, like: false, r: 3.5},
-        //         {tmdb: '418078', name: 'It Comes at Night', rewatch: false, like: false, r: 3.5},
-        //         {tmdb: '418078', name: 'It Comes at Night', rewatch: false, like: false, r: 3.5},
-        //         {tmdb: '418078', name: 'It Comes at Night', rewatch: false, like: false, r: 3.5},
-        //     ]}
         if (!(year > 0)) {
             year = "";
         }
         if (!(month > 0)) {
             month = "";
         }
+
+        try {
+            const localStorageData = localStorage.getItem(
+                username.toLowerCase(),
+            );
+            if (localStorageData !== null && localStorageData !== "undefined") {
+                const tmpdata = JSON.parse(localStorageData);
+                const targetYear = parseInt(year);
+                const targetMonth = parseInt(month);
+                const filteredWatched = tmpdata["watched"]
+                    .map((item) => {
+                        const filteredDates = item.d.filter((d) => {
+                            const dateObj = new Date(d.date);
+                            return (
+                                dateObj.getFullYear() === targetYear &&
+                                dateObj.getMonth() + 1 === targetMonth
+                            );
+                        });
+                        if (filteredDates.length > 0) {
+                            return { ...item, d: filteredDates };
+                        }
+                    })
+                    .filter(Boolean);
+
+                const resp = await fetch(baseUrl + "collage", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        year: targetYear,
+                        month: targetMonth,
+                        watched: filteredWatched,
+                    }),
+                });
+                let result = await resp.json();
+                if (Array.isArray(result)) {
+                    result = result[0];
+                }
+                return result;
+            }
+        } catch (e) {
+            console.error("Error in POST collage, falling back to GET", e);
+        }
+
         const resp = await fetch(
             baseUrl +
                 "collage/" +

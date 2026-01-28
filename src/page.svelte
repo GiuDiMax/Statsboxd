@@ -4,18 +4,12 @@
     import { roles, tmdb_key, lbdurl } from "./config.js";
     import {
         elementAt,
-        replaceDash,
         getUri,
-        ifNoneThenZero,
         numToStars,
         getValues,
         formatDate1,
         getSlice,
-        ifThenElse,
         replaceSize,
-        getWeek,
-        fillArray,
-        getWeeksInYear,
         last,
         arrayLength,
     } from "./helpers.js";
@@ -29,6 +23,10 @@
     import PersonItem from "./components/PersonItem.svelte";
     import ReleaseYearChart from "./components/ReleaseYearChart.svelte";
     import WorldMap from "./components/WorldMap.svelte";
+    import WeekStats from "./components/WeekStats.svelte";
+    import DayOfWeekChart from "./components/DayOfWeekChart.svelte";
+    import PieChartsSection from "./components/PieChartsSection.svelte";
+    import RatingSpreadChart from "./components/RatingSpreadChart.svelte";
 
     let { data, year, yearnum } = $props();
 
@@ -1025,13 +1023,7 @@
         {/if}
         <section class="sectionStats">
             <SectionHeader title="By week" />
-            <div class="chart-container weekChartcontainer">
-                <div id="watchedWeek" class="weekChart"></div>
-            </div>
-            <div class="years">
-                <span>Jan</span>
-                <span>Dec</span>
-            </div>
+            <WeekStats {data} />
             <div class="watchedDivided">
                 <div class="wd1">
                     <div class="wd1x">
@@ -1054,7 +1046,7 @@
                     </div>
                 </div>
                 <div class="wd2">
-                    <div id="watchedDayWeek" class="weekDayChart"></div>
+                    <DayOfWeekChart {data} />
                 </div>
             </div>
         </section>
@@ -1469,33 +1461,11 @@
         <section class="sectionStats">
             <SectionHeader title="Breakdown" />
             <div class="breakdown">
-                <div class="piecharts">
-                    <div class="piechart">
-                        <div class="legend">
-                            <span class="green">{yearnum} Releases</span>
-                            <span class="">Older</span>
-                        </div>
-                        <div id="currentYearpie" class="piech2"></div>
-                    </div>
-                    <div class="piechart">
-                        <div class="legend">
-                            <span class="green">Watches</span>
-                            <span class="">Re-watches</span>
-                        </div>
-                        <div id="rewatchpie" class="piech2"></div>
-                    </div>
-                    <div class="piechart">
-                        <div class="legend">
-                            <span class="green">Reviewed</span>
-                            <span class="">Not Reviewed</span>
-                        </div>
-                        <div id="reviewspie" class="piech2"></div>
-                    </div>
-                </div>
+                <PieChartsSection {data} year={yearnum} />
                 {#if data.ru}
                     <div class="ratingSpreadsection">
                         <img src="images/1stars.png" alt="1star" />
-                        <div id="ratingSpread" class="ratingSpread"></div>
+                        <RatingSpreadChart {data} />
                         <img src="images/5stars.png" alt="5stars" />
                     </div>
                     <span class="linetitle">Rating Spread</span>
@@ -1684,6 +1654,6 @@
     {/if}
     <section class="wMap noselect">
         <span class="wmTitle">World Map</span>
-        <WorldMap {data} {year} />
+        <WorldMap {data} {year} {yearnum} />
     </section>
 </div>
