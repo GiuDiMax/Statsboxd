@@ -1,4 +1,4 @@
-.fileUploadContainer{
+.fileUploadContainer {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -9,7 +9,7 @@
     margin-top: 2em;
 }
 
-.fileUploadContainer p{
+.fileUploadContainer p {
     width: 85%;
     max-width: 600px;
     margin-left: auto;
@@ -17,26 +17,27 @@
     line-height: 1.5em;
 }
 
-.fileUploadContainer .logo{
+.fileUploadContainer .logo {
     max-width: 200px;
     margin-bottom: 1em;
 }
 
-.fileUploadContainer p{
+.fileUploadContainer p {
     color: white;
     text-align: center;
     line-height: 1.5em;
 }
 
-.fileUploadContainer .message{
+.fileUploadContainer .message {
     color: lightcoral;
 }
 
-.fileUploadContainer .message a, .fileUploadContainer a{
+.fileUploadContainer .message a,
+.fileUploadContainer a {
     color: #40bcf4;
 }
 
-.fileUpload{
+.fileUpload {
     max-width: 800px;
     max-height: 150px;
     display: flex;
@@ -46,30 +47,30 @@
     cursor: pointer;
 }
 
-.fileUpload p{
+.fileUpload p {
     font-family: Graphik-Regular-Web, sans-serif;
     color: black;
 }
 
-.confirmationBox{
+.confirmationBox {
     text-align: center;
 }
 
-.confirmationBox .high{
+.confirmationBox .high {
     font-weight: bold;
     font-size: 1.5em;
     margin-bottom: 1em;
 }
 
-.confirmationBox .icon span{
+.confirmationBox .icon span {
     font-size: 50px;
 }
 
-.confirmationBox .icon span:hover{
+.confirmationBox .icon span:hover {
     color: #40bcf4;
 }
 
-.loaderContainer2{
+.loaderContainer2 {
     z-index: 9999;
     background: #14181c url(https://s.ltrbxd.com/static/img/content-bg.0d9a0f0f.png) 0 -1px repeat-x;
     width: 100vw;
@@ -84,7 +85,7 @@
     align-items: center;
 }
 
-.confirmationBox .btn{
+.confirmationBox .btn {
     font-family: Graphik-Regular-Web, sans-serif;
     color: white;
     background-color: #445566;
@@ -93,10 +94,13 @@
     padding: 0.5em 1em;
     box-shadow: none;
     text-decoration: none;
+    cursor: pointer;
+    border: none;
+    outline: none;
 }
 
-.confirmationBox .btn:hover{
-    color: #283038;
+.confirmationBox .btn:hover {
+    color: #ffffff;
     background-color: #646d77;
 }
 
@@ -105,20 +109,38 @@
     aspect-ratio: 1;
     border-radius: 50%;
     animation:
-            l3-1 2s infinite linear,
-            l3-2 3s infinite steps(1) -.5s;
-}
-@keyframes l3-1 {
-    0%   {transform: perspective(150px) rotateX(  0deg) rotateY(0deg)}
-    50%  {transform: perspective(150px) rotateX(180deg) rotateY(0deg)}
-    100% {transform: perspective(150px) rotateX(180deg) rotateY(180deg)}
-}
-@keyframes l3-2 {
-    0%  {background: #00df54}
-    33% {background: #ff8000}
-    66% {background: #41bbf4}
+        l3-1 2s infinite linear,
+        l3-2 3s infinite steps(1) -.5s;
 }
 
-.bgblackwrapped{
+@keyframes l3-1 {
+    0% {
+        transform: perspective(150px) rotateX(0deg) rotateY(0deg)
+    }
+
+    50% {
+        transform: perspective(150px) rotateX(180deg) rotateY(0deg)
+    }
+
+    100% {
+        transform: perspective(150px) rotateX(180deg) rotateY(180deg)
+    }
+}
+
+@keyframes l3-2 {
+    0% {
+        background: #00df54
+    }
+
+    33% {
+        background: #ff8000
+    }
+
+    66% {
+        background: #41bbf4
+    }
+}
+
+.bgblackwrapped {
     position: fixed;
 }

@@ -759,7 +759,7 @@
                     <span class="material-symbols-rounded icon">sync</span
                     >Update
                 </span>
-                <!--<a
+                <a
                     class="clickable seeallbutton updatebutton collagebutton"
                     href="/?username={data.username}&collage&year={previousMonth.getFullYear()}&month={previousMonth.getMonth() +
                         1}"
@@ -767,7 +767,7 @@
                 >
                     <span class="material-symbols-rounded icon">grid_on</span
                     >Last month collage
-                </a>-->
+                </a>
                 <!--<a
                     class="clickable seeallbutton updatebutton wrappedbutton"
                     href="/?username={data.username}&wrapped"

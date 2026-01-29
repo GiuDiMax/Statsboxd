@@ -157,39 +157,54 @@
         jQuery("#hideChangeBtn").click(function () {
             jQuery(".tohide").addClass("hide");
         });
-        jQuery("#btndownload").click(function () {
+        jQuery("#btndownload").click(async function () {
             jQuery(".tohide").addClass("hide");
             jQuery("#loader").show();
+
+            const node = document.getElementById("wrapped");
+            const options = {
+                quality: 0.9,
+                canvasWidth: 1080,
+                canvasHeight: 1920,
+                pixelRatio: 1,
+            };
+
             try {
                 ["backdropimg", "topActor", "topDirector"].forEach((i) => {
                     CORSimage(i);
                 });
-                htmlToImage
-                    .toJpeg(document.getElementById("wrapped"), {
-                        quality: 0.9,
-                        canvasWidth: 1080,
-                        canvasHeight: 1920,
-                        pixelRatio: 1,
-                    })
-                    .then(function (dataUrl) {
-                        var link = document.createElement("a");
-                        link.download = "collage.jpg";
-                        link.href = dataUrl;
-                        link.click();
-                        jQuery(".tohide").removeClass("hide");
-                        jQuery("#loader").hide();
-                    })
-                    .catch(function () {
-                        jQuery(".tohide").removeClass("hide");
-                        jQuery("#loader").hide();
-                        alert("Error! Please do a screenshot");
+                // First attempt with default settings (includes font embedding)
+                const dataUrl = await htmlToImage.toJpeg(node, options);
+                downloadImage(dataUrl);
+            } catch (error) {
+                console.error(
+                    "First download attempt failed, retrying without font embedding...",
+                    error,
+                );
+                try {
+                    // Second attempt without font embedding (bypasses problematic CSS scanning)
+                    const dataUrl = await htmlToImage.toJpeg(node, {
+                        ...options,
+                        fontEmbedCSS: "",
                     });
-            } catch {
-                jQuery(".tohide").removeClass("hide");
-                jQuery("#loader").hide();
-                alert("Error! Please do a screenshot");
+                    downloadImage(dataUrl);
+                } catch (err) {
+                    console.error("Second download attempt failed:", err);
+                    jQuery(".tohide").removeClass("hide");
+                    jQuery("#loader").hide();
+                    alert("Error! Please do a screenshot");
+                }
             }
         });
+
+        function downloadImage(dataUrl) {
+            var link = document.createElement("a");
+            link.download = "collage.jpg";
+            link.href = dataUrl;
+            link.click();
+            jQuery(".tohide").removeClass("hide");
+            jQuery("#loader").hide();
+        }
 
         jQuery("#changeFilm").on("click", function () {
             index = index + 1;

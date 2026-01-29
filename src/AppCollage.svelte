@@ -67,14 +67,26 @@
                     })
                     .filter(Boolean);
 
-                const resp = await fetch(baseUrl + "collage", {
-                    method: "POST",
-                    body: JSON.stringify({
-                        year: targetYear,
-                        month: targetMonth,
-                        watched: filteredWatched,
-                    }),
-                });
+                const resp = await fetch(
+                    baseUrl +
+                        "collage/" +
+                        username +
+                        "?year=" +
+                        year +
+                        "&month=" +
+                        month,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            year: targetYear,
+                            month: targetMonth,
+                            watched: filteredWatched,
+                        }),
+                    },
+                );
                 let result = await resp.json();
                 if (Array.isArray(result)) {
                     result = result[0];
@@ -82,7 +94,7 @@
                 return result;
             }
         } catch (e) {
-            console.error("Error in POST collage, falling back to GET", e);
+            // console.error("Error in POST collage", e);
         }
 
         const resp = await fetch(
@@ -93,7 +105,13 @@
                 year +
                 "&month=" +
                 month,
-            { method: "GET" },
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({}),
+            },
         );
         return resp.json();
     }
@@ -176,14 +194,20 @@
     }
 
     function init(data) {
+        const wpcontainer = jQuery("#wpcontainer");
+        const loader = jQuery("#loader");
+        const tohide = jQuery(".tohide");
+
         var scale = document.documentElement.clientHeight / 1280;
         const scale2 = document.documentElement.clientWidth / 720;
         if (scale2 < scale) {
             scale = scale2;
         }
-        jQuery("#wpcontainer").css("transform", "scale(" + scale + ")");
-        jQuery("#wpcontainer").css("-moz-transform", "scale(" + scale + ")");
-        jQuery("#wpcontainer").css("-webkit-transform", "scale(" + scale + ")");
+        wpcontainer.css({
+            transform: "scale(" + scale + ")",
+            "-moz-transform": "scale(" + scale + ")",
+            "-webkit-transform": "scale(" + scale + ")",
+        });
         const n = data.ids.length;
         var d = Math.sqrt(n);
         d = Math.ceil(d);
@@ -194,38 +218,71 @@
             "grid-template-columns",
             "repeat(" + d + ", 1fr)",
         );
-        jQuery("#loader").hide();
+        loader.hide();
 
         jQuery("#hideChangeBtn").click(function () {
-            jQuery(".tohide").addClass("hide");
+            tohide.addClass("hide");
         });
 
-        jQuery("#btndownload").click(function () {
-            jQuery(".tohide").addClass("hide");
-            jQuery("#loader").show();
+        jQuery("#btndownload").click(async function () {
+            tohide.addClass("hide");
+            loader.show();
+
+            // Remove problematic Google Fonts links that cause html-to-image to crash
+            const links = document.querySelectorAll(
+                'link[href*="Material+Symbols+Outlined"], link[href*="Material+Symbols+Rounded"]',
+            );
+            links.forEach((link) => link.remove());
+
+            const node = document.getElementById("wrapped");
+            const options = {
+                quality: 0.9,
+                canvasWidth: 1080,
+                canvasHeight: 1920,
+                pixelRatio: 1,
+            };
+
             try {
-                htmlToImage
-                    .toJpeg(document.getElementById("wrapped"), {
-                        quality: 0.9,
-                        canvasWidth: 1080,
-                        canvasHeight: 1920,
-                        pixelRatio: 1,
-                    })
-                    .then(function (dataUrl) {
-                        console.log("OK!");
-                        var link = document.createElement("a");
-                        link.download = "collage.jpg";
-                        link.href = dataUrl;
-                        link.click();
-                        jQuery(".tohide").removeClass("hide");
-                        jQuery("#loader").hide();
+                // First attempt with default settings (includes font embedding)
+                const dataUrl = await htmlToImage.toJpeg(node, options);
+                downloadImage(dataUrl);
+            } catch (error) {
+                // console.error(
+                //     "First download attempt failed, retrying without font embedding...",
+                //     error,
+                // );
+                try {
+                    // Second attempt without font embedding (bypasses problematic CSS scanning)
+                    jQuery(
+                        "#wrapped .title, #wrapped .containertextimg span",
+                    ).css("font-weight", "bold");
+                    const dataUrl = await htmlToImage.toJpeg(node, {
+                        ...options,
+                        fontEmbedCSS: "",
                     });
-            } catch {
-                jQuery(".tohide").addClass("hide");
-                jQuery("#loader").hide();
-                alert("Error! Please do a screenshot");
+                    downloadImage(dataUrl);
+                } catch (err) {
+                    console.error("Second download attempt failed:", err);
+                    tohide.removeClass("hide");
+                    loader.hide();
+                    alert("Error! Please do a screenshot");
+                } finally {
+                    jQuery(
+                        "#wrapped .title, #wrapped .containertextimg span",
+                    ).css("font-weight", "");
+                }
             }
         });
+
+        function downloadImage(dataUrl) {
+            console.log("OK!");
+            var link = document.createElement("a");
+            link.download = "collage.jpg";
+            link.href = dataUrl;
+            link.click();
+            tohide.removeClass("hide");
+            loader.hide();
+        }
     }
 
     onMount(async () => {
