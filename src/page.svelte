@@ -126,9 +126,13 @@
         images.forEach((img) => observer.observe(img));
     }
 
-    function handleUpdate() {
+    function handleUpdate(e) {
         localStorage.clear();
-        window.location.search = "";
+        if (data.donator) {
+            window.location.search = "?username=" + data.username + "&donator";
+        } else {
+            window.location.search = "";
+        }
     }
 
     onMount(() => {
@@ -748,17 +752,17 @@
         </div>
         {#if year === ""}
             <div class="buttonstart">
-                <span
-                    role="button"
-                    tabindex="0"
+                <a
                     id="updatebtn"
+                    href={data.donator
+                        ? "/?username=" + data.username + "&donator"
+                        : "/#"}
                     onclick={handleUpdate}
-                    onkeydown={(e) => e.key === "Enter" && handleUpdate()}
                     class="clickable seeallbutton updatebutton"
                 >
                     <span class="material-symbols-rounded icon">sync</span
                     >Update
-                </span>
+                </a>
                 <a
                     class="clickable seeallbutton updatebutton collagebutton"
                     href="/?username={data.username}&collage&year={previousMonth.getFullYear()}&month={previousMonth.getMonth() +
