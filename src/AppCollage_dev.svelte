@@ -69,12 +69,12 @@
 
                 const resp = await fetch(
                     baseUrl +
-                    "collage/" +
-                    username +
-                    "?year=" +
-                    year +
-                    "&month=" +
-                    month,
+                        "collage/" +
+                        username +
+                        "?year=" +
+                        year +
+                        "&month=" +
+                        month,
                     {
                         method: "POST",
                         headers: {
@@ -99,12 +99,12 @@
 
         const resp = await fetch(
             baseUrl +
-            "collage/" +
-            username +
-            "?year=" +
-            year +
-            "&month=" +
-            month,
+                "collage/" +
+                username +
+                "?year=" +
+                year +
+                "&month=" +
+                month,
             {
                 method: "POST",
                 headers: {
@@ -123,9 +123,9 @@
         }
         const response = await fetch(
             "https://api.themoviedb.org/3/movie/" +
-            element2.data("tmdb") +
-            "?api_key=" +
-            tmdb_key,
+                element2.data("tmdb") +
+                "?api_key=" +
+                tmdb_key,
         );
         if (response.ok) {
             const data = await response.json();
@@ -165,12 +165,12 @@
         }
         const response = await fetch(
             "https://api.themoviedb.org/3/" +
-            m_t +
-            "/" +
-            code +
-            "/images?api_key=" +
-            tmdb_key +
-            lang,
+                m_t +
+                "/" +
+                code +
+                "/images?api_key=" +
+                tmdb_key +
+                lang,
         );
         if (response.ok) {
             const data = await response.json();
@@ -178,7 +178,7 @@
                 element2.attr(
                     "src",
                     "https://image.tmdb.org/t/p/w185/" +
-                    data["posters"][0]["file_path"],
+                        data["posters"][0]["file_path"],
                 );
                 element2.parent().addClass("imgok");
             } else if (lang !== "") {
@@ -293,11 +293,9 @@
 </script>
 
 <main>
-    {#if loading}
-        <div class="loaderContainer2">
+    {#if loading}<div class="loaderContainer2">
             <div class="loader2"></div>
-        </div>
-    {/if}
+        </div>{/if}
     <section class="bgblackwrapped" id="bodymain">
         <section id="wpcontainer" class="wrappedContainer">
             <div class="loaderContainer2" id="loader">
@@ -308,17 +306,17 @@
                     <div class="changeCloseContainer tohide collageContainer">
                         <div class="changeclose">
                             <span
-                                    role="button"
-                                    tabindex="0"
-                                    class="changebtn plantext"
-                                    id="hideChangeBtn">Hide this box</span
+                                role="button"
+                                tabindex="0"
+                                class="changebtn plantext"
+                                id="hideChangeBtn">Hide this box</span
                             >
                             <span
-                                    role="button"
-                                    tabindex="0"
-                                    style="margin-left:1rem; color:white;"
-                                    class="changebtn plantext"
-                                    id="btndownload">HQ Download</span
+                                role="button"
+                                tabindex="0"
+                                style="margin-left:1rem; color:white;"
+                                class="changebtn plantext"
+                                id="btndownload">HQ Download</span
                             >
                         </div>
                     </div>
@@ -334,55 +332,55 @@
                                         <span>{item.name}</span>
                                     </div>
                                     <img
-                                            class="image tmdbimg"
-                                            onload={setTmdb}
-                                            onerror={handleImageError}
-                                            src="images/posterbig.webp"
-                                            data-tmdb={item.tmdb}
-                                            data-tmdb_tv={item.tmdb_tv}
-                                            data-lbd={item.poster}
-                                            alt={item.name}
-                                            crossorigin="anonymous"
+                                        class="image tmdbimg"
+                                        onload={setTmdb}
+                                        onerror={handleImageError}
+                                        src="images/posterbig.webp"
+                                        data-tmdb={item.tmdb}
+                                        data-tmdb_tv={item.tmdb_tv}
+                                        data-lbd={item.poster}
+                                        alt={item.name}
+                                        crossorigin="anonymous"
                                     />
                                 </div>
                                 <span class="stars">
                                     {#if item.hasOwnProperty("r")}
-                                        {#each Array.from({length: parseInt(item.r)}, (_, i) => i) as i}
+                                        {#each Array.from({ length: parseInt(item.r) }, (_, i) => i) as i}
                                             <img
-                                                    class="star icon"
-                                                    src="images/star.svg"
-                                                    alt="star"
+                                                class="star icon"
+                                                src="images/star.svg"
+                                                alt="star"
                                             />
                                         {/each}
                                         {#if item.r > parseInt(item.r)}
                                             <img
-                                                    class="star icon"
-                                                    src="images/half.svg"
-                                                    alt="half star"
+                                                class="star icon"
+                                                src="images/half.svg"
+                                                alt="half star"
                                             />
                                         {/if}
                                     {/if}
                                     {#if item.hasOwnProperty("like")}{#if item.like}
                                             <img
-                                                    class="star icon"
-                                                    style="position: relative;top: 0.05em;"
-                                                    src="images/like.svg"
-                                                    alt="like"
+                                                class="star icon"
+                                                style="position: relative;top: 0.05em;"
+                                                src="images/like.svg"
+                                                alt="like"
                                             />
-                                    {/if}{/if}
+                                        {/if}{/if}
                                     {#if item.hasOwnProperty("rewatch")}{#if item.rewatch}
                                             <img
-                                                    class="star icon"
-                                                    src="images/rewatch.svg"
-                                                    alt="rewatch"
+                                                class="star icon"
+                                                src="images/rewatch.svg"
+                                                alt="rewatch"
                                             />
-                                    {/if}{/if}
+                                        {/if}{/if}
                                 </span>
                             </div>
                         {/each}
                     </div>
                     <div class="logocontainer">
-                        <img src="images/logo.webp" alt="statsboxd"/>
+                        <img src="images/logo.webp" alt="statsboxd" />
                     </div>
                 </div>
             </div>

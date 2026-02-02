@@ -26,8 +26,8 @@ let app;
 
 if (username !== null && rec !== null) {
   app = mount(AppRec, { target, props: { username } })
-} else if (idx !== null && donator !== null) {
-  app = mount(AppDonator, { target, props: { username, idx } })
+} else if (username !== null && donator !== null) {
+  app = mount(AppDonator, { target, props: { username } })
 } else if (username !== null && collage !== null) {
   app = mount(AppCollage, { target, props: { username, year, month } })
 } else if (username !== null && !isNaN(year)) {

@@ -209,7 +209,7 @@
             <ul style="line-height: 1.5em">
                 <li>
                     Stats without zip file using
-                    statsboxd.top?username=your_letterboxd_username&id=your_letterboxd_ide&donator;
+                    statsboxd.top?username=your_letterboxd_username&donator;
                 </li>
                 <li>Share your stats;</li>
                 <li>Technical support;</li>
