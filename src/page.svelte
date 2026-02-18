@@ -1224,7 +1224,7 @@
                     </div>
                 {/each}
                 <div class="infoavg">
-                    Themes and nanogenres with at least four rated films are
+                    Genres, countries and languages with at least four rated films are
                     included.
                 </div>
             </div>
