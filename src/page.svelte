@@ -1188,7 +1188,7 @@
                     ? ''
                     : 'hide'}"
             >
-                {#each [["genres", "genre", "rgb(72, 255, 132)"], ["countries", "country", "rgb(116, 240, 255)"], ["originallanguage", "language", "rgb(255, 184, 96)"]] as type}
+                {#each [["genres", "genre", "rgb(0, 224, 84)"], ["countries", "country", "rgb(64, 188, 244)"], ["originallanguage", "language", "rgb(255, 128, 0)"]] as type}
                     <div class="labels2">
                         {#each getValues(getSlice(data["tr_" + type[0]], 0, 10)) as element}
                             <div>
