@@ -10,7 +10,7 @@
     let tmpdata = $state({});
     const year = 2025;
     var index = 0;
-    const CORS = "https://worker.statsboxd.top/" + "cors?url=";
+    const CORS = "https://statsboxd-worker.vercel.app/" + "cors?url=";
 
     async function getWrapped(yearData) {
         const resp = await fetch(baseUrl + "wrapped", {
