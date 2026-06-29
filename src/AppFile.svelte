@@ -175,6 +175,10 @@
             <p class="errormsg message">{@html message}</p>
         {:else}
             <p>
+                <strong>The new site is <a href="https://statsboxd.giudimax.top">https://statsboxd.giudimax.top</a>, please bookmark it!</strong>
+                <br /><br />
+            </p>
+            <p>
                 Welcome to Statsboxd, to get your stats please export your data
                 from Letterboxd (<a
                     href="https://letterboxd.com/data/export/?fromApp=false"
