@@ -32,7 +32,7 @@
                 return `<div class="ttYear"><span class="ttTitle">${this.y - 1} films</span><span class="ttSubtitle">Year ${this.points[0].key}</span></div>`;
             };
         } else if (activeType === "ratingYear") {
-            statsData = data.ru.map((element) => ({
+            statsData = data.years.map((element) => ({
                 name: element["_id"],
                 y: element["avg"] + 1,
             }));
