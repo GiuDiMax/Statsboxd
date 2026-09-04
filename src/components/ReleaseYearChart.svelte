@@ -37,7 +37,8 @@
                 y: element["avg"] + 1,
             }));
             tooltipFormatter = function () {
-                return `<div class="ttYear"><span class="ttTitle">Rating ${this.y - 1}</span><span class="ttSubtitle">Year ${this.points[0].key}</span></div>`;
+                const cleanRating = Math.round((this.y - 1) * 100) / 100;
+                return `<div class="ttYear"><span class="ttTitle">Rating ${cleanRating}</span><span class="ttSubtitle">Year ${this.points[0].key}</span></div>`;
             };
         } else if (activeType === "diaryYear") {
             statsData = data.logsPerYear.map((element) => ({
