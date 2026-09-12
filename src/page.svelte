@@ -27,6 +27,7 @@
     import DayOfWeekChart from "./components/DayOfWeekChart.svelte";
     import PieChartsSection from "./components/PieChartsSection.svelte";
     import RatingSpreadChart from "./components/RatingSpreadChart.svelte";
+    import DecadePieChart from "./components/DecadePieChart.svelte";
 
     let { data, year, yearnum } = $props();
 
@@ -914,6 +915,15 @@
                 </div>
             {/if}
         </section>
+        {#if data.ru && data.years}
+            <section class="sectionStats">
+                <div class="sepline">
+                    <span>Films per decade</span>
+                    <div class="line"></div>
+                </div>
+                <DecadePieChart {data} />
+            </section>
+        {/if}
         {#if data.ru}
             <section class="sectionStats">
                 <div class="sepline">
